@@ -12,7 +12,7 @@ const db = mysql.createConnection({
     host : 'localhost',
     user : 'root',
     password : 'Supergona100.',
-
+    database:'expressDB',
     
     });
     
@@ -23,6 +23,14 @@ db.connect();
 
 //Endpoint de base de datos
 
+app.get('/createdb',(req,res)=>{
+    let sql ='CREATE DATABASE expressDB';
+    db.query(sql,(err,result)=>{
+    if(err)throw err;
+    console.log(result);    
+    res.send('Database created...')
+    })
+})
 
 
 
