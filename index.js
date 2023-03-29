@@ -2,10 +2,10 @@
 const express = require("express");
 const app = express();
 const PORT = 8080;
-const db = require("./config/database")//aqui nos traemos la info sensible de database
+const db = require("./config/database")//aqui nos traemos la info sensible
 
 app.use(express.json());//parsea el body
-
+app.use("/products", require(".config/database"))
 
 
 
@@ -61,15 +61,6 @@ app.get("/createTableProducts_Categories", (req, res) => {
 
 //endpoints para añadir un producto nuevo y para crear una categoría
 
-app.post("/", (req, res) => {
-    let sql = `INSERT INTO products (title, body) values
-        ('${req.body.title}', '${req.body.body}');`;
-    db.query(sql, (err, result) => {
-        if (err) throw err;
-        console.log(result);
-        res.send("Product added...");
-    });
-});
 
 
 
@@ -90,15 +81,7 @@ app.post("/c", (req, res) => {
 //endpoints para actualizar producto y categoria
 
 
-app.put('/product',(req,res)=>{
-    let newTitle = 'Updated Title';
-    let sql = `UPDATE products SET title = '${newTitle}'`;
-    db.query(sql, (err,result)=> {
-    if(err) throw err;
-    res.send('Products updated...')
-    })
-    })
-    
+
 
     app.put('/category',(req,res)=>{
         let newTitle = 'Updated Title';
