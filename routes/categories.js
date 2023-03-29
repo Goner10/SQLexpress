@@ -1,15 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../config/database.js');
+const CategoryController = require("../controllers/CategoryController")
+
 
 //endpoint para crear una categoría
 
-router.post("/c", (req, res) => {
-    let sql = `INSERT INTO categories (title) values
-            ('${req.body.title}');`;
-    db.query(sql, (err, result) => {
-        if (err) throw err;
-        console.log(result);
-        res.send("category added...");
-    });
-});
+router.post("/categories", CategoryController.postCategory)
+
+//endpoints para actualizar una categoria
+
+app.put('/categoriesAct', CategoryController.putCategory)
+
+module.exports = router;

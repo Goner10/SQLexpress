@@ -6,12 +6,10 @@ const db = require("./config/database")//aqui nos traemos la info sensible
 
 app.use(express.json());//parsea el body
 app.use("/products", require(".config/database"))
+app.use("/categories", require(".config/database"))
 
 
-
-
-//Endpoint de base de datos
-
+//creamos la base de datos
 app.get('/createdb', (req, res) => {
     let sql = 'CREATE DATABASE expressDB';
     db.query(sql, (err, result) => {
@@ -23,7 +21,7 @@ app.get('/createdb', (req, res) => {
 
 
 
-//crear tablas products y categorias
+//crear tablas productos y categorias
 
 app.get('/createtableProducts', (req, res) => {
 
@@ -59,38 +57,6 @@ app.get("/createTableProducts_Categories", (req, res) => {
 });
 
 
-//endpoints para añadir un producto nuevo y para crear una categoría
-
-
-
-
-app.post("/c", (req, res) => {
-    let sql = `INSERT INTO categories (title) values
-            ('${req.body.title}');`;
-    db.query(sql, (err, result) => {
-        if (err) throw err;
-        console.log(result);
-        res.send("category added...");
-    });
-});
-
-
-
-
-
-//endpoints para actualizar producto y categoria
-
-
-
-
-    app.put('/category',(req,res)=>{
-        let newTitle = 'Updated Title';
-        let sql = `UPDATE categories SET title = '${newTitle}'`;
-        db.query(sql, (err,result)=> {
-        if(err) throw err;
-        res.send('category updated...')
-        })
-        })
 
 
 
